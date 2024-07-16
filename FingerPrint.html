@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FingerprintJS Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/@fingerprintjs/fingerprintjs@3/dist/fp.min.js"></script>
+</head>
+<body>
+    <h1>FingerprintJS Authentication</h1>
+    <button id="authButton">Authenticate</button>
+    <p id="result"></p>
+
+    <script>
+        document.getElementById('authButton').addEventListener('click', async () => {
+            const fp = await FingerprintJS.load();
+            const result = await fp.get();
+            document.getElementById('result').textContent = `Fingerprint ID: ${result.visitorId}`;
+
+            // Send the fingerprint ID to PowerApps
+            window.location.href = `powerapps://result?visitorId=${result.visitorId}`;
+        });
+    </script>
+</body>
+</html>
